@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import HomeScreen from './screens/HomeScreen';
 
-function App() {
+const App:React.FC = () => {
   return (
-    <div className="App">
+    <div className="App font-NetflixSans">
       <HomeScreen/>
     </div>
   );

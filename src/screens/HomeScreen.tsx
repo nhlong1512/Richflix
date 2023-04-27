@@ -1,12 +1,19 @@
-import React from 'react'
-import { Button, Space } from 'antd';
+import React from "react";
+import { Row, Col } from "antd";
 
-const HomeScreen = () => {
+import NavBar from "../components/NavBar"
+import Content from "../components/Content";
+
+const HomeScreen: React.FC = () => {
   return (
-    <div className='text-red-500 text-[30px]' >HomeScreen
-    <Button type="primary">Primary Button</Button>
-    </div>
-  )
-}
+    <Row>
+      <Col span={24}>
+        <NavBar />
+        <Content/>
 
-export default HomeScreen
+      </Col>
+    </Row>
+  );
+};
+
+export default HomeScreen;
