@@ -1,28 +1,12 @@
 import React from 'react'
+import {Col, Row} from 'antd'
+import Banner from './Banner'
 
 const Content:React.FC = () => {
   return (
-    <div>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-        <h1>Content</h1>
-    </div>
+    <Col span={24}>
+      <Banner/>
+    </Col>
   )
 }
 

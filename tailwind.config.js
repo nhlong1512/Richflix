@@ -6,7 +6,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        NetflixSans: ["NetflixSans-Medium", "sans-serif"]
+        NetflixSansMedium: ["NetflixSans-Medium", "sans-serif"],
+        NetflixSansLight: ["NetflixSans-Light", "sans-serif"],
+        NetflixSansRegular: ["NetflixSans-Regular", "sans-serif"],
+        NetflixSansBold: ["NetflixSans-Bold", "sans-serif"],
       }
     },
   },

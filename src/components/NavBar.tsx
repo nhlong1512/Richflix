@@ -18,8 +18,8 @@ const NavBar: React.FC = () => {
     return () => window.removeEventListener("scroll", transitionNavBar);
   }, [])
   return (
-    <Col span={24} className={`${show && 'bg-[#000]'} fixed top-[0px] w-full z-[100]`}>
-      <Col span={22} offset={1} className="flex justify-between py-[24px]">
+    <Col span={24} className={`${show && 'bg-[#000]'} fixed top-[0px] w-full z-[100] transition-all duration-500 ease-in`}>
+      <Col span={22} offset={1} className="flex justify-between py-[24px] cursor-pointer">
         <Col>
           <img src={LogoNetflix} alt="logo" />
         </Col>
