@@ -10,7 +10,7 @@ const HomeScreen: React.FC = () => {
       <Col span={24}>
         <NavBar />
         <Content/>
-
+        
       </Col>
     </Row>
   );
