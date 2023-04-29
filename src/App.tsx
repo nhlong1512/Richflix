@@ -1,16 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import './App.css';
-import HomeScreen from './screens/HomeScreen';
+import "./App.css";
+import HomeScreen from "./screens/HomeScreen";
+import { useNavigate } from "react-router-dom";
+import RequireSignIn from "./screens/RequireSignIn";
 
+const App: React.FC = () => {
+  const navigate = useNavigate();
+  const user = null;
 
-const App:React.FC = () => {
-  
   return (
-    <div className="App">
-      <HomeScreen/>
-    </div>
+    <div className="App">{!user ? <RequireSignIn /> : <HomeScreen />}</div>
   );
-}
+};
 
 export default App;
