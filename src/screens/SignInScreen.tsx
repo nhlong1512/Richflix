@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Col, Form, Input } from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Form, Input, message } from "antd";
 import LogoNetflix from "../assets/images/Logo.png";
 import BgRequire from "../assets/images/BgRequire.jpg";
 import { useNavigate } from "react-router-dom";
-import { FormDataSignIn, FormDataSignUp } from "../models/models";
+import { FormDataSignIn } from "../models/models";
+import { auth } from "../firebase";
 
 const styleBgRequire: React.CSSProperties = {
   backgroundImage: `url(${BgRequire})`,
@@ -24,21 +25,61 @@ const styleBgGradient: React.CSSProperties = {
 
 const SignInScreen = () => {
   const navigate = useNavigate();
-  const initialState:FormDataSignIn = {
+  const initialState: FormDataSignIn = {
     email: "",
     password: "",
-  }
+  };
+  const [messageApi, contextHolder] = message.useMessage();
 
   //Handle change formData Sign in
-  const [formData, setFormData] = useState<FormDataSignIn>(initialState)
+  const [formData, setFormData] = useState<FormDataSignIn>(initialState);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, [e.target.name]:e.target.value})
-  }
-  console.log(formData);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  //Handle Sign In
+  const handleSignIn = () => {
+    const { email, password } = formData;
+    if (!email || !password) {
+      let message = errorMessage;
+      message = "Please enter email and password. ";
+      setErrorMessage(message);
+      return;
+    }
+    if (email && password) {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          //Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/");
+        })
+        .catch((error) => {
+          let message = errorMessage;
+          message = "The user name or password is incorrect.";
+          setErrorMessage(message);
+        });
+    }
+  };
+
+  //Handle error message
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: errorMessage,
+    });
+  };
+  useEffect(() => {
+    if (errorMessage) error();
+  }, [errorMessage]);
+
   
 
   return (
     <Col style={styleBgRequire}>
+      {contextHolder}
       <Col style={styleBgGradient}>
         <Col
           span={24}
@@ -80,18 +121,21 @@ const SignInScreen = () => {
               type="email"
               placeholder="Email"
               name="email"
-              onChange = {handleChange}
+              onChange={handleChange}
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] min-w-[300px]"
             />
             <Input
               size="large"
               placeholder="Password"
-              name = "password"
+              name="password"
               type="password"
-              onChange = {handleChange}
+              onChange={handleChange}
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] mt-[16px] min-w-[300px]"
             />
-            <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full w-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center mt-[36px]">
+            <button
+              onClick={handleSignIn}
+              className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full w-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center mt-[36px]"
+            >
               Sign In
             </button>
             <p className="font-NetflixSansMedium text-white mb-0">

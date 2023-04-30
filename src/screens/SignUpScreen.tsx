@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Col, Form, Input } from "antd";
+import React, { useEffect, useState } from "react";
+import { Col, Form, Input, message } from "antd";
 import LogoNetflix from "../assets/images/Logo.png";
 import BgRequire from "../assets/images/BgRequire.jpg";
 import { useNavigate } from "react-router-dom";
 import { FormDataSignUp } from "../models/models";
+import { auth } from "../firebase";
 
 const styleBgRequire: React.CSSProperties = {
   backgroundImage: `url(${BgRequire})`,
@@ -30,16 +31,63 @@ const SignUpScreen = () => {
     password: "",
     confirmPassword: "",
   };
+  const [messageApi, contextHolder] = message.useMessage();
 
   //Handle formData Sign up change
   const [formData, setFormData] = useState<FormDataSignUp>(initialState);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  console.log(formData);
-  
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  //Handle Sign Up
+  const handleSignUp = () => {
+    const { fullName, email, password, confirmPassword } = formData;
+    if (!email || !password || !fullName || !confirmPassword) {
+      let message = errorMessage;
+      message = "Please enter full name, email, password and confirm password. ";
+      setErrorMessage(message);
+      return;
+    }
+    if (password !== confirmPassword) {
+      let message = errorMessage;
+      message = "Password and Confirm Password is not match. ";
+      setErrorMessage(message);
+      return;
+    }
+    if (password === confirmPassword) {
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          //Signed in
+          const user = userCredential.user;
+          user?.updateProfile({
+            displayName: fullName,
+          });
+          navigate("/");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+        });
+    }
+  };
+
+  //Handle error message
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: errorMessage,
+    });
+  };
+  useEffect(() => {
+    if (errorMessage) error();
+  }, [errorMessage]);
+
   return (
     <Col style={styleBgRequire}>
+      {contextHolder}
       <Col style={styleBgGradient}>
         <Col
           span={24}
@@ -108,7 +156,10 @@ const SignUpScreen = () => {
               onChange={handleChange}
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] mt-[16px] min-w-[300px]"
             />
-            <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full w-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center mt-[36px]">
+            <button
+              onClick={handleSignUp}
+              className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full w-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center mt-[36px]"
+            >
               Sign Up
             </button>
             <p className="font-NetflixSansMedium text-white mb-0">
