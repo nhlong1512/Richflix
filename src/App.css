@@ -11,3 +11,7 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+.ant-select-selection-placeholder {
+    color: #b9b6b5;
+  }

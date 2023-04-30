@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, Cascader } from "antd";
+import { Col, Cascader, Input, ConfigProvider, Button } from "antd";
 import LogoNetflix from "../assets/images/Logo.png";
 import BgRequire from "../assets/images/BgRequire.jpg";
+import {AiOutlineRight} from "react-icons/ai"
 
 interface Option {
   value: string | number;
@@ -56,7 +57,37 @@ const RequireSignIn = () => {
             </Col>
           </Col>
         </Col>
-        
+        <Col className="mx-auto flex justify-center items-center flex-col max-h-[100%] top-[24%]">
+          <h1 className="font-NetflixSansMedium text-white text-[48px] font-[900] m-0">
+            Unlimited movies, TV shows, and more
+          </h1>
+          <p className="font-NetflixSansLight text-white text-[24px] font-[500] mt-[16px] mb-0">
+            Watch anywhere. Cancel anytime.
+          </p>
+          <p className="font-NetflixSansLight text-white text-[20px] font-[500] mt-[16px]">
+            Ready to watch? Enter your email to create or restart your
+            membership.
+          </p>
+          <div className="flex justify-center items-center gap-[12px]">
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: "#b9b6b5",
+                },
+              }}
+            >
+              <Input
+                size="large"
+                placeholder="Email Address"
+                className="font-NetflixSansMedium font-[500] px-[8px] py-[16px] w-[380px] h-[56px] rounded-[4px]"
+              />
+            </ConfigProvider>
+            <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center">
+              Get Started
+              <AiOutlineRight/>
+            </button>
+          </div>
+        </Col>
       </Col>
     </Col>
   );
