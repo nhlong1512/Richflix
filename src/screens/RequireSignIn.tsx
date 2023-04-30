@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Col, Cascader, Input, ConfigProvider, Button } from "antd";
+import { Col, Cascader, Input, ConfigProvider } from "antd";
 import LogoNetflix from "../assets/images/Logo.png";
 import BgRequire from "../assets/images/BgRequire.jpg";
-import {AiOutlineRight} from "react-icons/ai"
+import { AiOutlineRight } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 interface Option {
   value: string | number;
@@ -34,6 +35,9 @@ const RequireSignIn = () => {
       label: "English",
     },
   ];
+
+  const navigate = useNavigate();
+
   return (
     <Col style={styleBgRequire}>
       <Col style={styleBgGradient}>
@@ -51,7 +55,10 @@ const RequireSignIn = () => {
             </Col>
             <Col className="flex justify-between items-center">
               {/* <Cascader defaultValue={['English']} options={options} /> */}
-              <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[14px] px-[16px] py-[4px] hover:opacity-70 rounded-[4px] leading-[24px]">
+              <button
+                onClick={() => navigate("/sign-in")}
+                className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[14px] px-[16px] py-[4px] hover:opacity-70 rounded-[4px] leading-[24px]"
+              >
                 Sign In
               </button>
             </Col>
@@ -82,9 +89,12 @@ const RequireSignIn = () => {
                 className="font-NetflixSansMedium font-[500] px-[8px] py-[16px] w-[380px] h-[56px] rounded-[4px]"
               />
             </ConfigProvider>
-            <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center">
+            <button
+              onClick={() => navigate("/sign-in")}
+              className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center"
+            >
               Get Started
-              <AiOutlineRight/>
+              <AiOutlineRight />
             </button>
           </div>
         </Col>
