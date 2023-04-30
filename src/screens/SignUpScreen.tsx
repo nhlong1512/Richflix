@@ -21,9 +21,8 @@ const styleBgGradient: React.CSSProperties = {
     "linear-gradient(to top, rgba(0,0,0,0.8) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%)",
 };
 
-const SignInScreen = () => {
+const SignUpScreen = () => {
   const navigate = useNavigate();
-
   return (
     <Col style={styleBgRequire}>
       <Col style={styleBgGradient}>
@@ -42,10 +41,10 @@ const SignInScreen = () => {
             <Col className="flex justify-between items-center">
               {/* <Cascader defaultValue={['English']} options={options} /> */}
               <button
-                onClick={() => navigate("/sign-up")}
+                onClick={() => navigate("/sign-in")}
                 className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[14px] px-[16px] py-[4px] hover:opacity-70 rounded-[4px] leading-[24px]"
               >
-                Sign Up
+                Sign In
               </button>
             </Col>
           </Col>
@@ -60,12 +59,17 @@ const SignInScreen = () => {
             style={{ background: "rgba(0,0,0, 0.85)" }}
           >
             <h3 className="font-NetflixSansMedium font-[300] text-[30px] leading-[36px] text-white mt-0">
-              Sign In
+              Sign Up
             </h3>
             <Input
               size="large"
-              placeholder="Email"
+              placeholder="Full Name"
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] min-w-[300px]"
+            />
+            <Input
+              size="large"
+              placeholder="Email"
+              className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] min-w-[300px] mt-[16px]"
             />
             <Input
               size="large"
@@ -73,17 +77,23 @@ const SignInScreen = () => {
               type="password"
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] mt-[16px] min-w-[300px]"
             />
+            <Input
+              size="large"
+              placeholder="Confirm Password"
+              type="password"
+              className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] mt-[16px] min-w-[300px]"
+            />
             <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full w-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center mt-[36px]">
-              Sign In
+              Sign Up
             </button>
             <p className="font-NetflixSansMedium text-white mb-0">
-              <span className="opacity-50">New To Netflix ? </span>
+              <span className="opacity-50">Already have to account ? </span>
               &nbsp;
               <span
-                onClick={() => navigate("/sign-up")}
+                onClick={() => navigate("/sign-in")}
                 className="font-NetflixSansMedium hover:underline hover:opacity-70"
               >
-                Sign Up Now
+                Sign In
               </span>
             </p>
           </Form>
@@ -93,4 +103,4 @@ const SignInScreen = () => {
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;

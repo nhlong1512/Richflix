@@ -1,28 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-import NotFoundScreen from './screens/NotFoundScreen';
-import App from './App';
-import SignInScreen from './screens/SignInScreen';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import NotFoundScreen from "./screens/NotFoundScreen";
+import App from "./App";
+import SignInScreen from "./screens/SignInScreen";
+import SignUpScreen from "./screens/SignUpScreen";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     errorElement: <NotFoundScreen />,
   },
   {
     path: "/sign-in",
-    element: <SignInScreen/>,
-  }
+    element: <SignInScreen />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUpScreen />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
-
-root.render(
-    <RouterProvider router = {router}/>
-);
+root.render(<RouterProvider router={router} />);
