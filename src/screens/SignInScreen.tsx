@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Form, Input } from "antd";
 import LogoNetflix from "../assets/images/Logo.png";
 import BgRequire from "../assets/images/BgRequire.jpg";
 import { useNavigate } from "react-router-dom";
+import { FormDataSignIn, FormDataSignUp } from "../models/models";
 
 const styleBgRequire: React.CSSProperties = {
   backgroundImage: `url(${BgRequire})`,
@@ -23,6 +24,18 @@ const styleBgGradient: React.CSSProperties = {
 
 const SignInScreen = () => {
   const navigate = useNavigate();
+  const initialState:FormDataSignIn = {
+    email: "",
+    password: "",
+  }
+
+  //Handle change formData Sign in
+  const [formData, setFormData] = useState<FormDataSignIn>(initialState)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({...formData, [e.target.name]:e.target.value})
+  }
+  console.log(formData);
+  
 
   return (
     <Col style={styleBgRequire}>
@@ -64,13 +77,18 @@ const SignInScreen = () => {
             </h3>
             <Input
               size="large"
+              type="email"
               placeholder="Email"
+              name="email"
+              onChange = {handleChange}
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] min-w-[300px]"
             />
             <Input
               size="large"
               placeholder="Password"
+              name = "password"
               type="password"
+              onChange = {handleChange}
               className="font-NetflixSansMedium font-[500] px-[8px] py-[10px] rounded-[4px] mt-[16px] min-w-[300px]"
             />
             <button className="font-NetflixSansMedium text-white bg-[#e50914] cursor-pointer border-none font-[500] text-[24px] h-full w-full px-[24px] py-[16px] hover:opacity-70 rounded-[4px] leading-[24px] flex justify-center items-center mt-[36px]">
