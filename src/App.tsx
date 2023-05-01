@@ -5,6 +5,8 @@ import RequireSignIn from "./screens/RequireSignIn";
 import { auth } from "./firebase";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { signIn, signOut, selectUser } from "./features/userSlice";
+import { useNavigate } from "react-router-dom";
+import { User } from "./models/models";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,14 +24,13 @@ const App: React.FC = () => {
             phoneNumber: userAuth.phoneNumber,
           })
         );
-        console.log(userAuth);
       } else {
         //Logged out
-        dispatch(signOut);
+        dispatch(signOut());
       }
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">{!user ? <RequireSignIn /> : <HomeScreen />}</div>

@@ -5,8 +5,10 @@ import Profile from "../assets/images/ProfileIMG.png";
 import { auth } from "../firebase";
 import { signOut } from "../features/userSlice";
 import { useAppDispatch } from "../app/hooks";
+import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [show, handleShow] = useState<boolean>(false);
   const transitionNavBar = () => {
@@ -17,11 +19,16 @@ const NavBar: React.FC = () => {
     }
   };
 
-  //Handle Sign Out
-  const handleSignOut = async () => {
+  const onClickUser = () => {
+    navigate("/profile");
     // await auth.signOut();
     // dispatch(signOut);
   };
+
+  const onClickHome = () => {
+    navigate("/");
+  }
+
 
   useEffect(() => {
     window.addEventListener("scroll", transitionNavBar);
@@ -40,10 +47,10 @@ const NavBar: React.FC = () => {
         className="flex justify-between py-[24px] cursor-pointer"
       >
         <Col>
-          <img src={LogoNetflix} alt="logo" />
+          <img src={LogoNetflix} alt="logo" onClick = {onClickHome} />
         </Col>
         <Col>
-          <img src={Profile} alt="imgUser" onClick={handleSignOut} />
+          <img src={Profile} alt="imgUser" onClick={onClickUser} />
         </Col>
       </Col>
     </Col>
