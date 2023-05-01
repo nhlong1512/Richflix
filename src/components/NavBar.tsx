@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row } from "antd";
+import { Col } from "antd";
 import LogoNetflix from "../assets/images/Logo.png";
 import Profile from "../assets/images/ProfileIMG.png";
+import { auth } from "../firebase";
+import { signOut } from "../features/userSlice";
+import { useAppDispatch } from "../app/hooks";
 
 const NavBar: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [show, handleShow] = useState<boolean>(false);
   const transitionNavBar = () => {
     if (window.scrollY > 100) {
@@ -11,6 +15,12 @@ const NavBar: React.FC = () => {
     } else {
       handleShow(false);
     }
+  };
+
+  //Handle Sign Out
+  const handleSignOut = async () => {
+    // await auth.signOut();
+    // dispatch(signOut);
   };
 
   useEffect(() => {
@@ -33,7 +43,7 @@ const NavBar: React.FC = () => {
           <img src={LogoNetflix} alt="logo" />
         </Col>
         <Col>
-          <img src={Profile} alt="imgUser" />
+          <img src={Profile} alt="imgUser" onClick={handleSignOut} />
         </Col>
       </Col>
     </Col>

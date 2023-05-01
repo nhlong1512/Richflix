@@ -23,7 +23,7 @@ const styleBgGradient: React.CSSProperties = {
     "linear-gradient(to top, rgba(0,0,0,0.8) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%)",
 };
 
-const SignInScreen = () => {
+const SignInScreen:React.FC = () => {
   const navigate = useNavigate();
   const initialState: FormDataSignIn = {
     email: "",

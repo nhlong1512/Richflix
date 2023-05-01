@@ -1,4 +1,3 @@
-import { StringLiteral } from "typescript";
 
 export interface Movie {
   first_air_date: Date;
@@ -22,4 +21,12 @@ export interface FormDataSignUp {
   email:string;
   password: string;
   confirmPassword: string;
+}
+
+export interface User {
+  id: string;
+  fullName: string | null;
+  email: string | null;
+  photoURL: string | null;
+  phoneNumber: string | null;
 }
